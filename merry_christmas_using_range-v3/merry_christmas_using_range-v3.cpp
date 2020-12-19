@@ -6,6 +6,7 @@
 #include <iterator>
 #include <algorithm>
 #include <concepts>
+#include <cmath>
 
 namespace rv = ranges::views;
 using namespace std::string_literals;
@@ -67,7 +68,7 @@ auto MakeChristmasTree(T const level, Ts const&... messages)
 		})
 		| rv::join
 		| ranges::to<std::vector<std::string>>()
-		| ranges::actions::push_back(std::vector<std::string>(3, std::string(std::max(msg_max_len / 2 - 1, center_pos / 2), ' ') + "***"))
+		| ranges::actions::push_back(std::vector<std::string>(3, std::string(std::max((msg_max_len - 1) / 2, center_pos / 2), ' ') + "***"))
 		| ranges::actions::push_back({
 			""s,
 			std::string((std::max(msg_max_len, center_pos) - ranges::size(messages)) / 2 + 2, ' ') + messages...
